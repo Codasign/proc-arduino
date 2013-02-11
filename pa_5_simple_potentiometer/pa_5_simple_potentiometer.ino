@@ -12,5 +12,5 @@ void loop() {
   
   Serial.println( potValue );
   
-  delay( 10 );
+  delay( 100 );
 }

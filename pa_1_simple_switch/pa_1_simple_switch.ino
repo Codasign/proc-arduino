@@ -5,6 +5,7 @@ int switchPin = 7;
 
 void setup() {
   Serial.begin( 9600 );
+  //pinMode( switchPin, INPUT );
 }
 
 void loop() {
@@ -12,5 +13,5 @@ void loop() {
   
   Serial.println(switchValue);
   
-  delay( 10 );
+  delay( 100 );
 }
