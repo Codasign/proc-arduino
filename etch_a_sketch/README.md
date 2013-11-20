@@ -34,7 +34,7 @@ Lesson 3
 --------
 Review setting up a potentiometer and reading in an analogue value into the Arduino.
 
-Send the potentiometer value to Processing using newlines.
+Send the potentiometer value to Processing using newlines.  Note that the button won't work any more.
 
 In Processing, use bufferUntil to parse string values and then map potentiometer range to window width.  Control the x position of the pen with the potentiometer.
 
