@@ -31,7 +31,7 @@ void setup() {
  everything here happens repeatedly
  */
 void draw() {
-  ellipse( penX, penY, 30, 30 );
+  ellipse( penX, mouseY, 30, 30 );
 }
 
 /* serialEvent
@@ -43,7 +43,7 @@ void serialEvent(Serial p) {
   inString = trim( inString );  // remove any whitespace
   println( inString );
 
-  int v = int(value); // convert from a string to int
+  int v = int(inString); // convert from a string to int
   penX = map( v, 0, 1023, 0, width); // map to window size
 }
 
