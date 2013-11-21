@@ -10,8 +10,8 @@ Assumed knowledge
 - Basics of reading in digital and analog signals into Arduino
 - Printing to Serial Monitor in Arduino IDE
 - Circuits
--- Momentary switch or pushbutton
--- Potentiometer
+	- Momentary switch or pushbutton
+	- Potentiometer
 
 ### Processing
 - Basics of drawing in Procesing
