@@ -12,7 +12,7 @@ We are going to mimic this interaction using Arduino and Processing.  We will us
 
 ## 1. Processing Sketch
 
-### Setting up the sketch
+### Setting Up the Sketch
 First we set up the sketch as we would any Processing sketch with `setup()` and `draw()` functions.
 
 	void setup() {
@@ -23,7 +23,7 @@ First we set up the sketch as we would any Processing sketch with `setup()` and 
 	
 	}
 
-### Drawing with the mouse
+### Drawing with the Mouse
 Now we are ready to add some interaction.
 
 ![Screenshot of Processing sketch](./screenshot.jpg)
@@ -34,7 +34,7 @@ Create a new Processing sketch.  Use the `ellipse()` shape to draw a trail of ci
 #### Exercise 2
 If you haven't already, use variables to control the colour and diameter of the circles.
 
-### Clearing with a key press
+### Clearing with a Key Press
 Now that we have a trail of circles wherever the mouse moved, we need to add functionality to clear the screen.  We will use the `keyPressed()` function.
 
 	void keyPressed() {
@@ -52,17 +52,17 @@ If you haven't done so already, use a variable or multiple variables to set the 
 ## 2. Adding a Button
 We will introduce control from our Arduino by adding a tactile button to clear the screen.
 
-### The circuit
+### Circuit
 #### Exercise 1
 Using a breadboard, Arduino, tactile button and 10k resistor, set up a circuit to read in the state of the button on Digital Pin 7.
 
 ![button circuit with external pullup](./arduino_button-pullup.jpg)
 
-### The Arduino code
+### Arduino Code
 #### Exercise 2
 Write and upload an Arduino sketch that reads in the state of the button on Digital Pin 7 and prints it on the Serial Monitor.  Check that a 1 is printed when the button is not pressed, and a 0 is shown when it is pressed.
 
-### Using internal pull up resistors
+### Using Internal Pull Up Resistors
 The resistor in the button circuit is a called a pull up resistor.  This is because if the switch is open, the signal on the pin on the Arduino reading in the state of the switch is pulled up to 5V.  If this pull up resistor hooked up to 5V wasn't there and the switch was open, the pin would be reading in random values.  We wouldn't know if the pin is reading in 0 because it is actually connected to ground or if it's just a random number.
 
 The Arduino has resistors in the microcontoller that can be used instead of external resistors.  We activate these resistors in code and then have a simpler circuit with fewer components.
@@ -79,7 +79,7 @@ To activate the internal pull up resistor, we need to add a line to our `setup()
 
 Confirm that your button still works as before.
 
-### The Processing code
+### Processing Code
 When we use `Serial.print()` in our Arduino code, we are sending information over the Arduino's serial port.  When we open the Serial Monitor in the Arduino IDE, we are reading that data from the Arduino through the computer's serial port.  Processing can access that same serial port and read that data into Processing.
 
 ** It is important to note that only one device or application can read from a serial port at a time.  This means if Serial Monitor is open and reading in data, then a Processing sketch also reading in that same data can't be running.  Furthermore, new sketches are loaded onto the Arduino using the serial port, so if you have a Processing sketch running that is accessing the serial port, then you can't upload a new Arduino sketch. **
@@ -151,7 +151,7 @@ Note that since the data is a `String` you will need to do the following to test
 ## 3. Adding the First Knob
 We will now add controling the pen from a potentiometer.  For now our button won't work with Processing, but will fix that at the end.
 
-### The circuit
+### Circuit
 #### Exercise 1
 Build a circuit with the Arduino reading in the value from a potentiometer into Analogue Pin 0.
 
@@ -160,13 +160,13 @@ Build a circuit with the Arduino reading in the value from a potentiometer into 
 In order to have both the button and potentiometer on the same breadboard you will need to alter the layout in order for both components to access 5V.
 
  
-### The Arduino code
+### Arduino Code
 With the button we were only sending one character at a time - either a 0 or 1.  When we read in an analogue value, we can have up to 4 characters at a time (since the analogue inputs can be up to 1023).  We need to know how many digits are in number, so we add a special character to separate consecutive values.  We could use anything, but it's easy to use the newline character `'/n'`.
 
 #### Exercise 2
 Write a Arduino sketch that reads the potentiometer value and prints to the serial port with a newline after each value.  Verify it's working by looking at the data stream in the Serial Monitor. 
 
-### The Processing code
+### Processing Code
 We have already set up our Processing sketch to read in data from the serial port, but we can have pay special attention to certain characters.  We can tell it to only call the `serialEvent()` function when a certain character is received.  This lets the data sit and wait for all the characters to arrive before reading in the `String` of our full value.
 
 #### Exercise 3
@@ -188,11 +188,11 @@ Now that we have an integer that is the value from our potentiometer, change you
 ## 4. Adding the Second Knob
 To add a second potentiometer isn't much more work than adding the first one.  We will use a second special character to separate the first potentiometer value from the second potentiometer value.
 
-### The circuit
+### Circuit
 #### Exercise 1
 Add the second potentiometer to the breadboard.  Connect it to Analogue Pin 1.
 
-### The Arduino code
+### Arduino Code
 #### Exercise 2
 Change your Arduino code so that the data sent to the serial port looks like:
 
@@ -201,7 +201,7 @@ Change your Arduino code so that the data sent to the serial port looks like:
 	229; 1
 
 
-### The Processing code
+### Processing Code
 We now have 2 values included each time we read in a `String` from the serial port.  We know that they are separated by a `;`, so we can use that to split up the `String`.
 
 #### Excercise 3
@@ -222,4 +222,40 @@ Add the below code to `serialEvent()` and then add in the missing lines of code 
 
 
 ## 5. Putting It All Together
+We now have all the elements in place and just have a few last steps to complete.
 
+### Circuit
+#### Exercise 1
+If you haven't done so already, make sure you have
+
+- a button being read into Digital Pin 7 (should read 1 when not pressed, 0 when pressed)
+- a potentiometer connected to A0
+- a potentiometer connected to A1
+ 
+
+### Arduino Code
+#### Exercise 2
+We are now going to print the values from the button and both potentiometers.  We will add labels so we know where each piece of data came from.  Alter your Arduino code so that it prints the following:
+
+	x: 10; y: 87; button: 1
+	x: 11; y: 87; button: 1
+	x: 12; y: 86; button: 1
+
+
+### Processing Code
+#### Exercise 2
+We already know how to read in a `String` and look for a particular character, then split it up into multiple `String`s.
+
+The following code will split up a `String` wherever there is a `;` and then each shorter `String` is processed one by one.
+
+	String pairs[] = split( inString, ';' ); // split up string into pairs
+	
+	// go through each pair of label and value
+	// and assign it to its variable
+	for ( int i=0; i<pairs.length; i++) { 
+		// add code here to split Strings again
+	}
+
+Add code in the `for` loop to further split the `String` where there is a `:`.  Then compare the first item in the array from the split to see if the value is from `x`, `y`, or `button`.  Remember you use `equals()` to compare `String`s.
+
+You should now have an Etch A Sketch that is controlled by two knobs and a button.  Now you can customise the drawing style!
