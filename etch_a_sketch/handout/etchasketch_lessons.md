@@ -149,9 +149,40 @@ Note that since the data is a `String` you will need to do the following to test
 	}
 
 ## 3. Adding the First Knob
+We will now add controling the pen from a potentiometer.  For now our button won't work with Processing, but will fix that at the end.
+
 ### The circuit
+#### Exercise 1
+Build a circuit with the Arduino reading in the value from a potentiometer into Analogue Pin 0.
+
+![potentiometer circuit](./arduino_pot.jpg)
+
+In order to have both the button and potentiometer on the same breadboard you will need to alter the layout in order for both components to access 5V.
+
+ 
 ### The Arduino code
+With the button we were only sending one character at a time - either a 0 or 1.  When we read in an analogue value, we can have up to 4 characters at a time (since the analogue inputs can be up to 1023).  We need to know how many digits are in number, so we add a special character to separate consecutive values.  We could use anything, but it's easy to use the newline character `'/n'`.
+
+#### Exercise 2
+Write a Arduino sketch that reads the potentiometer value and prints to the serial port with a newline after each value.  Verify it's working by looking at the data stream in the Serial Monitor. 
+
 ### The Processing code
+We have already set up our Processing sketch to read in data from the serial port, but we can have pay special attention to certain characters.  We can tell it to only call the `serialEvent()` function when a certain character is received.  This lets the data sit and wait for all the characters to arrive before reading in the `String` of our full value.
+
+#### Exercise 3
+In your `setup()` function, add the following line after you instantiate the `Serial` object:
+
+	myPort = new Serial(this, Serial.list()[10], 9600);
+	myPort.bufferUntil('\n');
+
+Print out the value of `inString` in your `serialEvent()` function and check that the full number is being read in, not only single digits at a time.
+
+#### Exercise 4
+In order to use the value being read in as a `int` variable, we need to convert or cast the `String` into an `int`.  The following line does that.
+
+	int v = int(inString); // convert from a string to int
+
+Now that we have an integer that is the value from our potentiometer, change your Processing code so that the potentiometer moves the pen of your drawing left and right (the up and down is still controlled by the mouse).
 
 
 ## 4. Adding the Second Knob
