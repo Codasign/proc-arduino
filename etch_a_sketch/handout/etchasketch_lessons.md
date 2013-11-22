@@ -186,9 +186,39 @@ Now that we have an integer that is the value from our potentiometer, change you
 
 
 ## 4. Adding the Second Knob
+To add a second potentiometer isn't much more work than adding the first one.  We will use a second special character to separate the first potentiometer value from the second potentiometer value.
+
 ### The circuit
+#### Exercise 1
+Add the second potentiometer to the breadboard.  Connect it to Analogue Pin 1.
+
 ### The Arduino code
+#### Exercise 2
+Change your Arduino code so that the data sent to the serial port looks like:
+
+	231; 0
+	230; 1
+	229; 1
+
+
 ### The Processing code
+We now have 2 values included each time we read in a `String` from the serial port.  We know that they are separated by a `;`, so we can use that to split up the `String`.
+
+#### Excercise 3
+The following line of code takes a `String` and looks for the character `;`.  It then returns an array of `String` types.
+ 	
+	String data[] = split( inString, ';' );
+
+We now can test and make sure there are two items in the array as we would expect.  If there are, then we can clean up any whitespace from the `String`.
+
+Add the below code to `serialEvent()` and then add in the missing lines of code so that the data from the potentiometers control both the x and y movement of the pen.
+
+	if ( data.length == 2 ) { // continue only if there are 2 things
+    	String xValue = trim( data[0] ); // remove extra whitespace
+    	String yValue = trim( data[1] ); // remove extra whitespace
+
+    // convert from string to int and then resize range to window
+	}
 
 
 ## 5. Putting It All Together
