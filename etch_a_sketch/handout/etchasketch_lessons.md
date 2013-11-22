@@ -1,11 +1,12 @@
+![Codasign logo](./codasign_logo.png)
 Arduino Etch A Sketch Workshop
 ======================
-![Codasign logo](./codasign_logo.png)
+
 
 ## What is an Etch A Sketch?
-![Etch A Sketch Photo](./etch-a-sketch.jpg)
-
 An Etch A Sketch is a drawing toy that was sold by the Ohio Art Company. It was first sold in the 1960s.  The toy draws a line using two controllers: a knob that changes the horizontal position and a second knob for the vertical position.  To erase what has been drawn, the toy is flipped upside down and is shaken.
+
+![Etch A Sketch Photo](./etch-a-sketch.jpg)
 
 We are going to mimic this interaction using Arduino and Processing.  We will use Processing to draw on a computer, and we will control that drawing using two potentiomenters and a tactile button.
 
