@@ -57,7 +57,7 @@ We will introduce control from our Arduino by adding a tactile button to clear t
 #### Exercise 1
 Using a breadboard, Arduino, tactile button and 10k resistor, set up a circuit to read in the state of the button on Digital Pin 7.
 
-![button circuit with external pullup](./arduino_button-pullup.jpg)
+![button circuit with external pullup](./arduino_button_pullup.jpg)
 
 ### Arduino Code
 #### Exercise 2
