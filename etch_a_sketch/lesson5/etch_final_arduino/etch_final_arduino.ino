@@ -6,8 +6,7 @@ int buttonPin = 7;
 
 void setup() {
   // turn on internal pull-up resistor
-  pinMode( buttonPin, INPUT );
-  digitalWrite( buttonPin, HIGH );
+  pinMode( buttonPin, INPUT_PULLUP );
 
   // start Serial
   Serial.begin( 9600 );

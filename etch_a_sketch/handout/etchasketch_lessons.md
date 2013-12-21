@@ -74,9 +74,8 @@ Build the below circuit, removing the external pull up resistor from your button
 ![button circuit with internal pullup](./arduino_button_pullup.png)
 
 #### Exercise 4
-To activate the internal pull up resistor, we need to add a line to our `setup()` function in our Arduino code.
-	pinMode( 7, INPUT ); // this sets up our pin to be an input
-	digitalWrite( 7, HIGH ); //this turns on our internal pull up on 7
+To activate the internal pull up resistor, we the second argument in the `pinMode()` function in our Arduino code.
+	pinMode( 7, INPUT_PULLUP ); // this sets up our pin to be an input
 
 Confirm that your button still works as before.
 
