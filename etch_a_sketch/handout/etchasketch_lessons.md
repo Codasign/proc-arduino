@@ -8,7 +8,7 @@ An Etch A Sketch is a drawing toy that was sold by the Ohio Art Company. It was 
 
 ![Etch A Sketch Photo](./etch-a-sketch.jpg)
 
-We are going to mimic this interaction using Arduino and Processing.  We will use Processing to draw on a computer, and we will control that drawing using two potentiomenters and a tactile button.
+We are going to mimic this interaction using Arduino and Processing.  We will use Processing to draw on a computer, and we will control that drawing using two potentiometers and a tactile button.
 
 
 ## 1. Processing Sketch
@@ -71,7 +71,7 @@ The Arduino has resistors in the microcontoller that can be used instead of exte
 #### Exercise 3
 Build the below circuit, removing the external pull up resistor from your button circuit.
 
-![button circuit with internal pullup](./arduino_button_pullup.png)
+![button circuit with internal pullup](./arduino_button-nopullup.png)
 
 #### Exercise 4
 To activate the internal pull up resistor, we the second argument in the `pinMode()` function in our Arduino code.
